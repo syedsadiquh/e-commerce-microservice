@@ -11,6 +11,11 @@ spring:
               predicates:
                 - Path=/products/**
 
+            - id: customer-service
+              uri: lb://customer-service
+              predicates:
+                - Path=/customers/**
+
 
 server:
   port: 2000
