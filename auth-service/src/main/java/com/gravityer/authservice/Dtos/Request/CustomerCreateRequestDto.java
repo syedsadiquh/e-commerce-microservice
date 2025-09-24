@@ -1,15 +1,15 @@
-package com.gravityer.customerservice.dtos;
+package com.gravityer.authservice.Dtos.Request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDto {
+@AllArgsConstructor
+@Builder
+public class CustomerCreateRequestDto {
     private Long authId;
     private String name;
     private String email;

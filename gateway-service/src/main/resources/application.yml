@@ -16,6 +16,11 @@ spring:
               predicates:
                 - Path=/customers/**
 
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth/**
+
 
 server:
   port: 2000

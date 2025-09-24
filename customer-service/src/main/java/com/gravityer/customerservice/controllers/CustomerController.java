@@ -22,20 +22,20 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.findAllCustomers());
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<BaseResponse<CustomerDto>> get(@PathVariable Long id) {
-        return ResponseEntity.ok(customerService.findCustomerById(id));
-    }
+//    @GetMapping("/get/{id}")
+//    public ResponseEntity<BaseResponse<CustomerDto>> get(@PathVariable Long id) {
+//        return ResponseEntity.ok(customerService.findCustomerById(id));
+//    }
 
     @PostMapping("/create")
     public ResponseEntity<BaseResponse<Customer>> create(@RequestBody CustomerDto customerDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerDto));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<BaseResponse<Customer>> update(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
-        return ResponseEntity.ok(customerService.updateCustomer(id, customerDto));
-    }
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<BaseResponse<Customer>> update(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
+//        return ResponseEntity.ok(customerService.updateCustomer(id, customerDto));
+//    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<BaseResponse<Void>> delete(@PathVariable Long id) {

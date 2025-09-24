@@ -34,21 +34,21 @@ public class CustomerService {
             throw new InternalErrorException("An error occurred while retrieving customers");
         }
     }
-
-    public BaseResponse<CustomerDto> findCustomerById(Long id) {
-        try {
-            var customer = customerRepository.findById(id).orElseThrow(
-                    () -> new NotFoundException("Customer with id " + id + " not found")
-            );
-            var customerDto = new CustomerDto(customer.getName(), customer.getEmail(), customer.getPassword(), customer.getRoles());
-            return new BaseResponse<>(true, "Customer retrieved successfully", customerDto);
-        } catch (NotFoundException e) {
-            throw e;
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            throw new InternalErrorException("An error occurred while retrieving the customer");
-        }
-    }
+//
+//    public BaseResponse<CustomerDto> findCustomerById(Long id) {
+//        try {
+//            var customer = customerRepository.findById(id).orElseThrow(
+//                    () -> new NotFoundException("Customer with id " + id + " not found")
+//            );
+//            var customerDto = new CustomerDto(customer.getName(), customer.getEmail(), customer.getPassword(), customer.getRoles());
+//            return new BaseResponse<>(true, "Customer retrieved successfully", customerDto);
+//        } catch (NotFoundException e) {
+//            throw e;
+//        } catch (Exception e) {
+//            log.error(e.getMessage(), e);
+//            throw new InternalErrorException("An error occurred while retrieving the customer");
+//        }
+//    }
 
     public BaseResponse<Customer> createCustomer(CustomerDto customerDto) {
         try {
@@ -63,24 +63,24 @@ public class CustomerService {
         }
     }
 
-    public BaseResponse<Customer> updateCustomer(Long id, CustomerDto customerDto) {
-        try {
-            var existingCustomer = customerRepository.findById(id).orElseThrow(
-                    () -> new NotFoundException("Customer with id " + id + " not found")
-            );
-            existingCustomer.setName(customerDto.getName());
-            existingCustomer.setEmail(customerDto.getEmail());
-            existingCustomer.setPassword(customerDto.getPassword());
-            existingCustomer.setRoles(customerDto.getRoles());
-            var updatedCustomer = customerRepository.save(existingCustomer);
-            return new BaseResponse<>(true, "Customer updated successfully", updatedCustomer);
-        } catch (NotFoundException e) {
-            throw e;
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            throw new InternalErrorException("An error occurred while updating the customer");
-        }
-    }
+//    public BaseResponse<Customer> updateCustomer(Long id, CustomerDto customerDto) {
+//        try {
+//            var existingCustomer = customerRepository.findById(id).orElseThrow(
+//                    () -> new NotFoundException("Customer with id " + id + " not found")
+//            );
+//            existingCustomer.setName(customerDto.getName());
+//            existingCustomer.setEmail(customerDto.getEmail());
+//            existingCustomer.setPassword(customerDto.getPassword());
+//            existingCustomer.setRoles(customerDto.getRoles());
+//            var updatedCustomer = customerRepository.save(existingCustomer);
+//            return new BaseResponse<>(true, "Customer updated successfully", updatedCustomer);
+//        } catch (NotFoundException e) {
+//            throw e;
+//        } catch (Exception e) {
+//            log.error(e.getMessage(), e);
+//            throw new InternalErrorException("An error occurred while updating the customer");
+//        }
+//    }
 
     public BaseResponse<Void> deleteCustomer(Long id) {
         try {

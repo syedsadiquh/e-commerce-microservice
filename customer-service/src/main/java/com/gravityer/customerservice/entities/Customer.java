@@ -16,12 +16,11 @@ public class Customer {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private long authId;
+
     private String name;
 
-    @Column(unique = true, nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String email;
-
-    private String password;
-
-    private Set<String> roles;
 }
