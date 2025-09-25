@@ -11,10 +11,10 @@ spring:
               predicates:
                 - Path=/products/**
 
-            - id: customer-service
-              uri: lb://customer-service
+            - id: user-service
+              uri: lb://user-service
               predicates:
-                - Path=/customers/**
+                - Path=/user/**
 
             - id: auth-service
               uri: lb://auth-service
