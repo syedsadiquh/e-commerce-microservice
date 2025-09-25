@@ -1,30 +1,31 @@
 package com.gravityer.userservice.services;
 
 import com.gravityer.userservice.controllers.BaseResponse;
-import com.gravityer.userservice.dtos.CustomerDto;
-import com.gravityer.userservice.entities.Customer;
+import com.gravityer.userservice.dtos.UserDto;
+import com.gravityer.userservice.entities.User;
 import com.gravityer.userservice.exceptions.InternalErrorException;
 import com.gravityer.userservice.exceptions.NotFoundException;
-import com.gravityer.userservice.mappers.CustomerMapper;
-import com.gravityer.userservice.repositories.CustomerRepository;
+import com.gravityer.userservice.mappers.UserMapper;
+import com.gravityer.userservice.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CustomerService {
+public class UserService {
 
-    private final CustomerRepository customerRepository;
-    private final CustomerMapper customerMapper;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public BaseResponse<List<Customer>> findAllCustomers() {
+    public BaseResponse<List<User>> findAllCustomers() {
         try {
-            var result = customerRepository.findAll();
+            var result = userRepository.findAll();
             if (result.isEmpty()) {
                 return new BaseResponse<>(false, "No customers found");
             }
@@ -50,10 +51,10 @@ public class CustomerService {
 //        }
 //    }
 
-    public BaseResponse<Customer> createCustomer(CustomerDto customerDto) {
+    public BaseResponse<User> createCustomer(UserDto userDto) {
         try {
-            var customer = customerMapper.toCustomer(customerDto);
-            var savedCustomer = customerRepository.save(customer);
+            var customer = userMapper.toUser(userDto);
+            var savedCustomer = userRepository.save(customer);
             return new BaseResponse<>(true, "Customer created successfully", savedCustomer);
         } catch (DataIntegrityViolationException e) {
             throw e;
@@ -84,16 +85,31 @@ public class CustomerService {
 
     public BaseResponse<Void> deleteCustomer(Long id) {
         try {
-            var existingCustomer = customerRepository.findById(id).orElseThrow(
+            var existingCustomer = userRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("Customer with id " + id + " not found")
             );
-            customerRepository.delete(existingCustomer);
+            userRepository.delete(existingCustomer);
             return new BaseResponse<>(true, "Customer deleted successfully");
         } catch (NotFoundException e) {
             throw e;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new InternalErrorException("An error occurred while deleting the customer");
+        }
+    }
+
+    public BaseResponse<User> getSelfDetails(Principal principal) {
+        try {
+            var user = userRepository.findByUsername(principal.getName());
+            if (user == null) {
+                throw new NotFoundException("User with username " + principal.getName() + " not found");
+            }
+            return new BaseResponse<>(true, "User details retrieved successfully", user);
+        } catch (NotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new InternalErrorException("An error occurred while retrieving user details");
         }
     }
 }

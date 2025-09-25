@@ -1,23 +1,29 @@
 package com.gravityer.userservice.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "user_service_users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Admin {
+public class User {
     @Id
     @GeneratedValue
     private Long id;
-    private Long authId;
+
+    @Column(nullable = false, unique = true)
+    private long authId;
+
+    @Column(nullable = false)
     private String username;
+
+    private String name;
+
+    @Column(nullable = false, length = 100)
     private String email;
 }

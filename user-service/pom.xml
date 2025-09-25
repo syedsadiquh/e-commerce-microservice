@@ -11,8 +11,8 @@
     <groupId>com.gravityer</groupId>
     <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>customer-service</name>
-    <description>customer-service</description>
+    <name>user-service</name>
+    <description>user-service</description>
     <url/>
     <licenses>
         <license/>
@@ -75,6 +75,28 @@
 <!--            <artifactId>mapstruct-processor</artifactId>-->
 <!--            <version>1.6.3</version>-->
 <!--        </dependency>-->
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.12.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.12.6</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.12.6</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
