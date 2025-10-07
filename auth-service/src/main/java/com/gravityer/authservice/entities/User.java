@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Entity(name = "users")
+@Entity(name = "_user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
