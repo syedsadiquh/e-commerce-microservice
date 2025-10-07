@@ -7,9 +7,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "customer-service")
+@FeignClient(name = "user-service")
 public interface CustomerServiceFeignClient {
 
-    @PostMapping("/customers/create")
+    @PostMapping("/user/create")
     BaseResponse<CustomerCreateResponseDto> createCustomer(@RequestBody CustomerCreateRequestDto customerRequest);
 }
